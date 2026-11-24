@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Inquiry | JNX EBIKE</title>
+  <meta name="description" content="Contact Nanjing Juenengxing New Energy Technology Co., Ltd. for electric two-wheeler and three-wheeler quotations, OEM/ODM customization and partnership inquiries.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="index.html" data-i18n="ph.home"></a> / <span data-i18n="ph.contact"></span></div>
+        <h1 data-i18n="ct.h1"></h1>
+        <p data-i18n="ct.p1"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="contact-grid">
+          <!-- 联系信息 -->
+          <div class="contact-info">
+            <h2 data-i18n="ct.info"></h2>
+            <p data-i18n="ct.p1"></p>
+            <div class="contact-item">
+              <span class="ci-icon" data-icon="map"></span>
+              <div><h4 data-i18n="ct.addr"></h4><p id="addr-zh" style="font-weight:500;font-size:14px;color:var(--text-mid)"></p><p id="addr-en" style="font-weight:500;font-size:14px;color:var(--text-mid);margin-top:4px"></p></div>
+            </div>
+            <div class="contact-item">
+              <span class="ci-icon" data-icon="mail"></span>
+              <div><h4 data-i18n="ct.email"></h4><a href="mailto:sales@jnx-ebike.com">sales@jnx-ebike.com</a></div>
+            </div>
+            <div class="contact-item">
+              <span class="ci-icon" data-icon="phone"></span>
+              <div><h4 data-i18n="ct.phone"></h4><p style="color:var(--muted);font-size:13px;font-weight:400">（请在网站上线前替换为真实联系方式）</p></div>
+            </div>
+            <div class="contact-item">
+              <span class="ci-icon" data-icon="clock"></span>
+              <div><h4 data-i18n="ct.hours"></h4><p data-i18n="ct.hoursv" style="font-size:14px"></p></div>
+            </div>
+            <div style="margin-top:30px;padding:18px;background:var(--bg-alt);border-radius:10px;border:1px solid var(--border)">
+              <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Unified Social Credit Code</div>
+              <div style="font-size:14px;font-weight:700;color:var(--primary);letter-spacing:.5px">91320106MAKADA2Q5J</div>
+            </div>
+          </div>
+
+          <!-- 询价表单 -->
+          <div class="form-card">
+            <h3 data-i18n="ct.formt"></h3>
+            <p data-i18n="ct.formp"></p>
+            <form id="inquiry-form">
+              <div class="form-row">
+                <div class="form-group"><label><span data-i18n="ct.name"></span> <span class="req">*</span></label><input type="text" name="name" required placeholder="John Smith"></div>
+                <div class="form-group"><label><span data-i18n="ct.company"></span></label><input type="text" name="company" placeholder="Company Name"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label><span data-i18n="ct.email2"></span> <span class="req">*</span></label><input type="email" name="email" required placeholder="john@company.com"></div>
+                <div class="form-group"><label><span data-i18n="ct.phone2"></span></label><input type="tel" name="phone" placeholder="+92 300 0000000"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label><span data-i18n="ct.country"></span></label><input type="text" name="country" placeholder="e.g. Pakistan, UAE, Nigeria"></div>
+                <div class="form-group"><label><span data-i18n="ct.product"></span></label>
+                  <select name="product">
+                    <option value="" data-i18n="ct.select"></option>
+                    <option value="2w" data-i18n="ct.p2w"></option>
+                    <option value="3wp" data-i18n="ct.p3wp"></option>
+                    <option value="3wc" data-i18n="ct.p3wc"></option>
+                    <option value="other" data-i18n="ct.pother"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group"><label><span data-i18n="ct.qty"></span></label>
+                <select name="qty">
+                  <option value="" data-i18n="ct.select"></option>
+                  <option value="1-50" data-i18n="ct.q1"></option>
+                  <option value="50-200" data-i18n="ct.q2"></option>
+                  <option value="200-500" data-i18n="ct.q3"></option>
+                  <option value="500+" data-i18n="ct.q4"></option>
+                </select>
+              </div>
+              <div class="form-group"><label><span data-i18n="ct.msg"></span></label><textarea name="message" placeholder="Tell us about your market, required specifications, certification needs, etc."></textarea></div>
+              <button type="submit" class="btn btn-primary btn-block btn-lg" data-i18n="ct.submit"></button>
+              <p class="form-note" data-i18n="ct.note"></p>
+              <div class="form-msg" id="form-msg"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">FAQ</span><h2 data-i18n="faq.t"></h2></div>
+        <div class="faq-list">
+          <div class="faq-item"><button class="faq-q"><span data-i18n="faq.1q"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a" data-i18n="faq.1a"></div></div>
+          <div class="faq-item"><button class="faq-q"><span data-i18n="faq.2q"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a" data-i18n="faq.2a"></div></div>
+          <div class="faq-item"><button class="faq-q"><span data-i18n="faq.3q"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a" data-i18n="faq.3a"></div></div>
+          <div class="faq-item"><button class="faq-q"><span data-i18n="faq.4q"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a" data-i18n="faq.4a"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('[data-icon]').forEach(function(el){
+        const name=el.getAttribute('data-icon');
+        if(ICONS[name]) el.innerHTML=ICONS[name];
+      });
+      var az=document.getElementById('addr-zh'), ae=document.getElementById('addr-en');
+      if(az) az.textContent=COMPANY.address;
+      if(ae) ae.textContent=COMPANY.addressEn;
+    });
+  </script>
+</body>
+</html>
