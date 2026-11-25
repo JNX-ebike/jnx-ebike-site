@@ -74,6 +74,7 @@ function injectLayout() {
         </div>
         <div class="footer-col">
           <h4 data-i18n="footer.cat"></h4>
+          <a href="products.html" data-i18n="pl.special"></a>
           <a href="products.html" data-i18n="prod.2w"></a>
           <a href="products.html" data-i18n="prod.3w"></a>
           <a href="contact.html" data-i18n="nav.quote"></a>
@@ -132,9 +133,11 @@ function productCard2W(p, idx, featured) {
   </article>`;
 }
 
-function productCard3W(p, idx) {
+function productCard3W(p, idx, tagIdx) {
+  // idx 用于对应原始产品图片，tagIdx 用于按展示顺序决定"热销"角标
   const img = TRI_IMAGES[idx % TRI_IMAGES.length];
-  const tag = idx < 2 ? '<'+'span class="product-tag hot" data-i18n="prod.hot"></span>' : '';
+  const ti = (typeof tagIdx === 'number') ? tagIdx : idx;
+  const tag = (ti >= 0 && ti < 2) ? '<'+'span class="product-tag hot" data-i18n="prod.hot"></span>' : '';
   return `<article class="product-card" data-type="${p.type}">
     <div class="product-media">
       <img src="${img}" alt="${p.model}" loading="lazy" class="prod-img">
@@ -186,10 +189,12 @@ function renderProducts() {
   const featured = document.getElementById('featured-grid');
   if (featured) {
     let html = '';
-    BIKES_3W.slice(0,3).forEach((p,i)=> html += productCard3W(p, i));
+    // 2026 特供系列优先展示
+    BIKES_SPECIAL.slice(0,3).forEach((p,i)=> html += productCardSpecial(p, i));
     html += productCard2W(BIKES_2W[0], 0, true);
     html += productCard2W(BIKES_2W[1], 1, true);
-    html += productCard2W(BIKES_2W[3], 3, false);
+    // 三轮客运放在最后
+    html += productCard3W(BIKES_3W[0], 0, 9);
     featured.innerHTML = html;
     // 翻译新注入的动态文本
     featured.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.getAttribute('data-i18n')));
@@ -198,9 +203,12 @@ function renderProducts() {
   const allGrid = document.getElementById('all-products-grid');
   if (allGrid) {
     let html = '';
-    BIKES_2W.forEach((p,i)=> html += productCard2W(p, i, false));
+    // 展示顺序：2026 特供系列 → 两轮车 → 货运三轮 → 三轮客运（最后）
     BIKES_SPECIAL.forEach((p,i)=> html += productCardSpecial(p, i));
-    BIKES_3W.forEach((p,i)=> html += productCard3W(p, i));
+    BIKES_2W.forEach((p,i)=> html += productCard2W(p, i, false));
+    // 三轮车按 type 分组，保留原数组下标以对应正确的产品图片
+    BIKES_3W.forEach((p,i)=>{ if (p.type === 'cargo')     html += productCard3W(p, i, 9); });
+    BIKES_3W.forEach((p,i)=>{ if (p.type === 'passenger') html += productCard3W(p, i, 9); });
     allGrid.innerHTML = html;
     allGrid.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.getAttribute('data-i18n')));
     applyFilterState();
