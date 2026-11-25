@@ -415,6 +415,10 @@ section { padding-block: 88px; }
   border: 1px solid #b6e8d8;
 }
 .form-msg.show { display: block; }
+.form-msg.error {
+  background: #fdecea; color: #b42318; border-color: #f3c6c0;
+}
+.form-card button[type="submit"]:disabled { opacity: .6; cursor: wait; }
 
 .faq-list { max-width: 820px; margin-inline: auto; }
 .faq-item { border: 1px solid var(--border); border-radius: 11px; margin-bottom: 12px; background: #fff; overflow: hidden; }

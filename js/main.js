@@ -101,23 +101,28 @@ function injectLayout() {
 }
 
 // ---------- 产品卡片渲染 ----------
+// 中文界面下把英文规格值翻成中文，其余语言保留原始数据
+function specVal(v) {
+  return (typeof currentLang !== 'undefined' && currentLang === 'zh' && SPEC_ZH[v]) ? SPEC_ZH[v] : v;
+}
+
 function productCard2W(p, idx, featured) {
   // 图02起为真实车型图（图01为画册封面，跳过）
   const img = `images/products/bike_2w_${String(idx+2).padStart(2,'0')}.jpg`;
-  const tag = featured && idx < 2 ? '<span class="product-tag hot">Hot</span>' : '';
+  const tag = featured && idx < 2 ? '<'+'span class="product-tag hot" data-i18n="prod.hot"></span>' : '';
   return `<article class="product-card" data-type="2w">
     <div class="product-media">
       <img src="${img}" alt="${p.model}" loading="lazy" class="prod-img">
       ${tag}
     </div>
     <div class="product-body">
-      <div class="product-model">JNX · 2W SERIES</div>
+      <div class="product-model" data-i18n="prod.series2w"></div>
       <h3>${p.model}</h3>
       <div class="spec-row">
-        <div class="spec-item">${ICONS.battery}<span><b data-i18n="spec.battery"></b>: ${p.battery}</span></div>
-        <div class="spec-item">${ICONS.bolt}<span><b data-i18n="spec.motor"></b>: ${p.motor}</span></div>
-        <div class="spec-item">${ICONS.settings}<span><b data-i18n="spec.brake"></b>: ${p.brake}</span></div>
-        <div class="spec-item">${ICONS.wrench}<span><b data-i18n="spec.tire"></b>: ${p.tire}</span></div>
+        <div class="spec-item">${ICONS.battery}<span><b data-i18n="spec.battery"></b>: ${specVal(p.battery)}</span></div>
+        <div class="spec-item">${ICONS.bolt}<span><b data-i18n="spec.motor"></b>: ${specVal(p.motor)}</span></div>
+        <div class="spec-item">${ICONS.settings}<span><b data-i18n="spec.brake"></b>: ${specVal(p.brake)}</span></div>
+        <div class="spec-item">${ICONS.wrench}<span><b data-i18n="spec.tire"></b>: ${specVal(p.tire)}</span></div>
       </div>
       <div class="product-foot">
         <a href="contact.html"><span data-i18n="prod.inquire"></span> ${ICONS.arrowRight}</a>
@@ -129,20 +134,45 @@ function productCard2W(p, idx, featured) {
 
 function productCard3W(p, idx) {
   const img = TRI_IMAGES[idx % TRI_IMAGES.length];
-  const tag = idx < 2 ? '<span class="product-tag hot">Hot</span>' : '';
+  const tag = idx < 2 ? '<'+'span class="product-tag hot" data-i18n="prod.hot"></span>' : '';
   return `<article class="product-card" data-type="${p.type}">
     <div class="product-media">
       <img src="${img}" alt="${p.model}" loading="lazy" class="prod-img">
       ${tag}
     </div>
     <div class="product-body">
-      <div class="product-model">JNX · 3W SERIES</div>
+      <div class="product-model" data-i18n="prod.series3w"></div>
       <h3>${p.model}</h3>
       <div class="spec-row">
-        <div class="spec-item">${ICONS.battery}<span><b data-i18n="spec.motor"></b>: ${p.motor}</span></div>
-        <div class="spec-item">${ICONS.settings}<span><b data-i18n="spec.brake"></b>: ${p.brake}</span></div>
-        <div class="spec-item">${ICONS.wrench}<span><b data-i18n="spec.tire"></b>: ${p.tire}</span></div>
-        <div class="spec-item">${ICONS.truck}<span><b data-i18n="spec.weight"></b>: ${p.weight}</span></div>
+        <div class="spec-item">${ICONS.battery}<span><b data-i18n="spec.motor"></b>: ${specVal(p.motor)}</span></div>
+        <div class="spec-item">${ICONS.settings}<span><b data-i18n="spec.brake"></b>: ${specVal(p.brake)}</span></div>
+        <div class="spec-item">${ICONS.wrench}<span><b data-i18n="spec.tire"></b>: ${specVal(p.tire)}</span></div>
+        <div class="spec-item">${ICONS.truck}<span><b data-i18n="spec.weight"></b>: ${specVal(p.weight)}</span></div>
+      </div>
+      <div class="product-foot">
+        <a href="contact.html"><span data-i18n="prod.inquire"></span> ${ICONS.arrowRight}</a>
+        <span class="moq" data-i18n="prod.moq"></span>
+      </div>
+    </div>
+  </article>`;
+}
+
+function productCardSpecial(p, idx) {
+  const tag = idx < 2 ? '<'+'span class="product-tag hot" data-i18n="prod.new"></span>' : '';
+  return `<article class="product-card" data-type="special">
+    <div class="product-media">
+      <img src="${p.img}" alt="${p.model}" loading="lazy" class="prod-img">
+      ${tag}
+    </div>
+    <div class="product-body">
+      <div class="product-model" data-i18n="prod.seriesSpecial"></div>
+      <h3>${p.model}</h3>
+      <div class="spec-row">
+        <div class="spec-item">${ICONS.battery}<span><b data-i18n="spec.battery"></b>: ${specVal(p.battery)}</span></div>
+        <div class="spec-item">${ICONS.bolt}<span><b data-i18n="spec.motor"></b>: ${specVal(p.motor)}</span></div>
+        <div class="spec-item">${ICONS.settings}<span><b data-i18n="spec.brake"></b>: ${specVal(p.brake)}</span></div>
+        <div class="spec-item">${ICONS.wrench}<span><b data-i18n="spec.tire"></b>: ${specVal(p.tire)}</span></div>
+        <div class="spec-item">${ICONS.truck}<span><b data-i18n="spec.size"></b>: ${specVal(p.size)}</span></div>
       </div>
       <div class="product-foot">
         <a href="contact.html"><span data-i18n="prod.inquire"></span> ${ICONS.arrowRight}</a>
@@ -169,6 +199,7 @@ function renderProducts() {
   if (allGrid) {
     let html = '';
     BIKES_2W.forEach((p,i)=> html += productCard2W(p, i, false));
+    BIKES_SPECIAL.forEach((p,i)=> html += productCardSpecial(p, i));
     BIKES_3W.forEach((p,i)=> html += productCard3W(p, i));
     allGrid.innerHTML = html;
     allGrid.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.getAttribute('data-i18n')));
@@ -228,18 +259,36 @@ function initInteractions() {
     q.addEventListener('click', ()=> q.parentElement.classList.toggle('open'));
   });
 
-  // 询价表单
+  // 询价表单 —— 真实发信（FormSubmit.co AJAX，邮件直达 sales@jnx-ebike.com）
   const form = document.getElementById('inquiry-form');
   if (form) {
-    form.addEventListener('submit', e => {
+    const msg = document.getElementById('form-msg');
+    const btn = form.querySelector('button[type="submit"]');
+    const showMsg = (text, isError) => {
+      if (!msg) return;
+      msg.textContent = text;
+      msg.classList.toggle('error', !!isError);
+      msg.classList.add('show');
+      msg.scrollIntoView({behavior:'smooth', block:'center'});
+    };
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      const msg = document.getElementById('form-msg');
-      if (msg) {
-        msg.textContent = t('ct.ok');
-        msg.classList.add('show');
-        msg.scrollIntoView({behavior:'smooth', block:'center'});
+      if (btn) { btn.disabled = true; }
+      showMsg(t('ct.sending'), false);
+      try {
+        const resp = await fetch('https://formsubmit.co/ajax/sales@jnx-ebike.com', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        showMsg(t('ct.ok'), false);
+        form.reset();
+      } catch (err) {
+        showMsg(t('ct.fail'), true);
+      } finally {
+        if (btn) { btn.disabled = false; }
       }
-      form.reset();
     });
   }
 }
